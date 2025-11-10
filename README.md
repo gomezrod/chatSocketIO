@@ -8,4 +8,4 @@ Se agrega otro comando /clearUsers para limpiar lista de conectados, y se actual
 
 Dejo mi [linkedin](https://www.linkedin.com/in/gomezrn)
 
-Y mi [CV](src/public/CV.pdf) está en la carpeta [public](src/public/) 😊
+Y mi [CV](src/public/RODRIGO%20GOMEZ%20CV%20DEV%202025.pdf) está en la carpeta [public](src/public/) 😊 o en el siguiente [link](https://drive.google.com/file/d/1cDS7SAENfBKHfbujLSHzZ4-3KJpsWcQW/view?usp=sharing)
