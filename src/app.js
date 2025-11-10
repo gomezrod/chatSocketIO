@@ -72,16 +72,31 @@ serverSocket.on('connection', (socket) => {
     socket.on('msg', (data) => {
         console.log(`Mensaje desde el cliente: ${socket.id}`, data);
         // historialMensajes.push({socketId: socket.id, mensaje: data, isLog: false});
+        
         if(data.mensaje === '/clear'){ //Acá Obviamente tendría que haber alguna verificación de permisos o algo así
             chatManager.clearChat().then(() => {
                 console.log('Chat vaciado por comando /clear');
             });
+        
             chatManager.getChat()
                 .then(res => {
                     serverSocket.emit('rsp', res);
                 });
             return;
         }
+
+        if (data.mensaje === '/clearUsers') { //Acá Obviamente tendría que haber alguna verificación de permisos o algo así
+            usersManager.clearUsers().then(() => {
+                console.log('Lista de conectados vaciada por comando /clearUsers');
+            });
+
+            usersManager.getUsers()
+                .then(res => {
+                    serverSocket.emit('listaUsuarios', res);
+                });
+            return;
+        }
+
         chatManager.addElement({socketId: socket.id, mensaje: data, isLog: false})
         .then(() => {
             chatManager.getChat()

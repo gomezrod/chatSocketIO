@@ -108,25 +108,10 @@ export class UsersManager{
         return { status: 'success' };
     }
 
-    async updateProduct(id, updateData){
-        const products = await readData(this.path);
-        const productIndex = products.findIndex(p => p.id === id);
-
-        if(productIndex === -1){
-            console.error(`Error: El producto con ID: ${id} no encontrado para actualizar.`);
-            return{ status: 'error', message: 'No se pudo actualizar, producto no encontrado.'};
-        }
-        
-        const updatedProduct = {
-            ...products[productIndex],
-            ...updateData,
-            id: id
-        }
-
-        products[productIndex] = updatedProduct;
-        await writeData(this.path, products);
-
-        console.log(`Producto con ID: ${id} actualizado.`);
-        return { status: 'success', product: updatedProduct };
+    async clearUsers(){
+        await writeData(this.path, []);
+        console.log("JSON Actualizado: Users limpiado correctamente.");
+        return { status: 'success' };
     }
+
 }

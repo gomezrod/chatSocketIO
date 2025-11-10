@@ -35,7 +35,14 @@ const teclaEnviar = 'Enter';
 // }
 
 socket.on('listaUsuarios', data => {
-    const listaUsuarios = data.map( u => `<li>${u.usuario}</li>`).join('');
+    const listaUsuarios = data.map( u => {
+        if(u.socketId === socket.id){
+            return `<li><b>${u.usuario} (Tú)</b></li>`;
+        }else{
+            return `<li>${u.usuario}</li>`;
+        }
+    }).join('<br/>');
+    
     usuariosOnline.innerHTML = listaUsuarios;
     cantidadOnline.innerText = `(${data.length})`;
 });
@@ -55,7 +62,11 @@ socket.on('rsp', data => {
         if(m.isLog){
             return `<i>${m.mensaje.nombre}${m.mensaje.mensaje}</i>`;
         }else{
-            return `<b>${m.mensaje.nombre}</b>: ${m.mensaje.mensaje}`;
+            if (m.socketId === socket.id) {
+                return `<b>Yo: </b>${m.mensaje.mensaje}`;
+            } else {
+                return `<b>${m.mensaje.nombre}: </b>`;
+            }
         }
     }).join('<br/><br/>');
     mensajes.innerHTML = listaMensajes;
